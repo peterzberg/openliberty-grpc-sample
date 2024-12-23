@@ -26,4 +26,32 @@ class GreetingResourceIT {
         assertThat(response.body()).isEqualTo("Hello, grpc!");
     }
 
+    @Test
+    void testErrorHandling() throws IOException, InterruptedException {
+        final HttpClient client = HttpClient.newHttpClient();
+        final HttpRequest greetingRequest = HttpRequest.newBuilder(URI.create("http://localhost:9080/api/greeting/runtimeException"))
+                .GET()
+                .header("accept", "text/plain")
+                .build();
+
+        final HttpResponse<String> response = client.send(greetingRequest, HttpResponse.BodyHandlers.ofString());
+
+        assertThat(response.statusCode()).isEqualTo(500);
+        assertThat(response.body()).isEqualTo("INTERNAL: runtimeException");
+    }
+
+    @Test
+    void testKnownException() throws IOException, InterruptedException {
+        final HttpClient client = HttpClient.newHttpClient();
+        final HttpRequest greetingRequest = HttpRequest.newBuilder(URI.create("http://localhost:9080/api/greeting/exception"))
+                .GET()
+                .header("accept", "text/plain")
+                .build();
+
+        final HttpResponse<String> response = client.send(greetingRequest, HttpResponse.BodyHandlers.ofString());
+
+        assertThat(response.statusCode()).isEqualTo(400);
+        assertThat(response.body()).isEqualTo("Cannot greet a person by name 'exception'");
+    }
+
 }

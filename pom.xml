@@ -46,6 +46,72 @@
         </dependencies>
     </dependencyManagement>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <!-- plugin config taken from https://github.com/OpenLiberty/ci.maven/blob/main/liberty-maven-app-parent/pom.xml -->
+                <plugin>
+                    <groupId>io.openliberty.tools</groupId>
+                    <artifactId>liberty-maven-plugin</artifactId>
+                    <version>3.11.2</version>
+                    <executions>
+                        <execution>
+                            <id>stop-before-clean</id>
+                            <phase>pre-clean</phase>
+                            <goals>
+                                <goal>stop</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>create-server</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>install-server</goal>
+                                <goal>create</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>install-feature</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>install-feature</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>install-apps</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>deploy</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>package-server</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>package</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>test-start</id>
+                            <phase>pre-integration-test</phase>
+                            <goals>
+                                <goal>test-start</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>test-stop</id>
+                            <phase>post-integration-test</phase>
+                            <goals>
+                                <goal>test-stop</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
     <modules>
         <module>contract</module>
         <module>server</module>

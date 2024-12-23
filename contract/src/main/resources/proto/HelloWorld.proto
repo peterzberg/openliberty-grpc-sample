@@ -3,7 +3,7 @@ package dev.zberg.test.proto;
 option java_multiple_files = true;
 
 service HelloWorldService {
-  rpc greet (GreetingRequest) returns (GreetingResponse) {}
+  rpc greet (GreetingRequest) returns (GreetingResponse);
 }
 
 message GreetingRequest {
