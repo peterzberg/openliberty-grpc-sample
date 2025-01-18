@@ -13,7 +13,7 @@
     <artifactId>client</artifactId>
 
     <properties>
-        <grpc.version>1.68.2</grpc.version>
+        <grpc.version>1.69.1</grpc.version>
     </properties>
 
     <dependencies>
