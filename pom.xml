@@ -16,8 +16,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
-         
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -32,6 +30,22 @@
                 <groupId>org.eclipse.microprofile</groupId>
                 <artifactId>microprofile</artifactId>
                 <version>7.0</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-bom</artifactId>
+                <version>1.68.2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-bom</artifactId>
+                <version>2.24.2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -115,7 +129,6 @@
     <modules>
         <module>contract</module>
         <module>server</module>
-        <module>client</module>
-        <module>api</module>
+        <module>grpc-helper</module>
     </modules>
 </project>

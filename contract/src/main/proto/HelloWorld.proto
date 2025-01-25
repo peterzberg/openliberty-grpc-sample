@@ -1,0 +1,15 @@
+syntax = "proto3";
+package dev.zberg.test.openliberty.grpc;
+option java_multiple_files = true;
+
+service HelloWorldService {
+  rpc greet (GreetingRequest) returns (GreetingResponse);
+}
+
+message GreetingRequest {
+    optional string greeterName = 1;
+}
+
+message GreetingResponse {
+    string greeting = 1;
+}

@@ -18,6 +18,9 @@
 
     <grpc target="*" maxInboundMessageSize="1024"/>
 
+    <library id="log4jConfig">
+        <folder dir="/{directory containning log4j config file}" scanInterval="5s" />
+    </library>
 
     <webApplication contextRoot="/" location="server.war"/>
 
