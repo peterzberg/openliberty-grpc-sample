@@ -6,10 +6,52 @@ service HelloWorldService {
   rpc greet (GreetingRequest) returns (GreetingResponse);
 }
 
+service InheritanceService {
+  rpc inheritanceTest (RequestWithInheritance) returns (ResponseWithInheritance);
+}
+
 message GreetingRequest {
-    optional string greeterName = 1;
+  optional string greeterName = 1;
 }
 
 message GreetingResponse {
-    string greeting = 1;
+  string greeting = 1;
+}
+
+// abstract class in java
+message A {
+  string aProperty = 1;
+}
+
+// B extends A
+message B {
+  A superType = 1;
+  string bProperty = 2;
+}
+
+// C extends B extends A
+message C {
+  B superType = 1;
+  string cProperty = 2;
+}
+
+// message containing a field of type 'A'. Field has to be wrapped
+message RequestWithInheritance {
+  AInheritance a = 1;
+}
+
+/**
+ * Container object for a field with inheritance
+ * See dev.zberg.test.openliberty.grpc.adapter.api.CompositeRequest for Java object implementation
+ */
+message AInheritance {
+  oneof inheritance {
+    B b = 1;
+    C c = 2;
+  }
+}
+
+message ResponseWithInheritance {
+  string type = 1;
+  AInheritance a = 2;
 }
